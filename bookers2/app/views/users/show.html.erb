@@ -1,0 +1,26 @@
+
+<div class="profile-container">
+  <h2>User info</h2>
+   <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <h4 class="profile-name">name <%= @user.name %></h4>
+  <h4 class="profile-introduction">introduction <%= @user.introduction %></h4>
+</div>
+
+ <% if @user.id == current_user.id %>
+    <%= link_to edit_user_path(@user) do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% end %>
+
+
+<% @books.each do |book| %>
+<div>
+  <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+  <!--<%= book.user.name %>book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
+  <%= link_to book_path(book.id) do %>
+    <%= book.title %>
+  <% end %>
+  <%= book.body %>
+</div>
+<% end %>
+<%= paginate @books %>

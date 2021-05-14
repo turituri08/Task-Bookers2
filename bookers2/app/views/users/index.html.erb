@@ -1,0 +1,8 @@
+<h1>Users</h1>
+<% @users.each do |user| %>
+<div>
+  <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+  <%= user.name %><!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
+  <%= link_to "Show", user_path(current_user.id) %>
+</div>
+<% end %>

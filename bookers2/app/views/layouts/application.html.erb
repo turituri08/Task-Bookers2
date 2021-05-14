@@ -12,6 +12,34 @@
   </head>
 
   <body>
+     <% if user_signed_in? %>
+      <li>
+        <%= link_to "Home", root_path %> <!--ここのHomeと下のHomeではurlが違う事に注意。こっちはユーザーの投稿詳細画面-->
+      </li>
+      <li>
+        <%= link_to "Users", new_book_path %>
+      </li>
+      <li>
+        <%= link_to "Books", root_path %>
+      </li>
+      <li>
+        <%= link_to "logout", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Home", root_path %>
+      </li>
+      <li>
+        <%= link_to "About", about_path %>
+      </li>
+      <li>
+        <%= link_to "Sign up", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "login", new_user_session_path %>
+      </li>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

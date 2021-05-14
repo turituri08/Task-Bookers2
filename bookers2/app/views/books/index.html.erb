@@ -1,0 +1,13 @@
+<h1>Books</h1>
+<% @books.each do |book| %>
+<div>
+  <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+  <%= book.user.name %><!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
+  <%= link_to book_path(book.id) do %>
+    <%= book.title %>
+  <% end %>
+  <%= book.body %>
+</div>
+<% end %>
+<%= paginate @books %>
+<!-- show=detailと同じ内容に今はなっているから、後々全ユーザーのBook.all　投稿一覧にする???-->
