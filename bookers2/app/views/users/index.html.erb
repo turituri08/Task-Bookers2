@@ -1,8 +1,30 @@
-<h1>Users</h1>
-<% @users.each do |user| %>
-<div>
-  <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-  <%= user.name %><!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
-  <%= link_to "Show", user_path(current_user.id) %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "layouts/side_bar", user: @user, book: @book %>
+    </div>
+
+    <div class="col-md-8 offset-md-1 mt-3">
+       <h2>Users</h2>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th>image</th><!-- このthがtable bodyのユーザーイメージのカラムに対応する部分、　ここを空にしておくことでTitleのところがピッタリ揃う-->
+              <th>name</th>
+              <th></th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= attachment_image_tag user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %></td>
+                <td><%= user.name %></td>
+                <td><%= link_to "Show", user_path(user) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+       </table>
+     </div>
+  </div>
 </div>
-<% end %>

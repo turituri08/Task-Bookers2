@@ -1,13 +1,39 @@
-<h1>Books</h1>
-<% @books.each do |book| %>
-<div>
-  <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-  <%= book.user.name %><!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
-  <%= link_to book_path(book.id) do %>
-    <%= book.title %>
+<% if @book.errors.any? %>
+    <%= @book.errors.count %>件のエラーが発生しました
+      <% @book.errors.full_messages.each do |message| %>
+        <%= message %>
+    <% end %>
   <% end %>
-  <%= book.body %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "layouts/side_bar", user: @user, book: @book %>
+    </div>
+
+    <div class="col-md-8 offset-md-1 mt-3">
+       <h2>Books</h2>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th></th><!-- このthがtable bodyのユーザーイメージのカラムに対応する部分、　ここを空にしておくことでTitleのところがピッタリ揃う-->
+              <th>Title</th>
+              <th>Opinion</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @books.each do |book| %>
+              <tr>
+                <td><%= attachment_image_tag @user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %></td>
+                <td><%= link_to book_path(book) do %>
+                    <%= book.title %><% end %></td>
+                <td><%= book.body %></td>
+              </tr>
+            <% end %>
+            <%= paginate @books %>
+          </tbody>
+       </table>
+     </div>
+  </div>
 </div>
-<% end %>
-<%= paginate @books %>
-<!-- show=detailと同じ内容に今はなっているから、後々全ユーザーのBook.all　投稿一覧にする???-->

@@ -1,14 +1,22 @@
-<h2>User info</h2>
+<div class="container">
+  <div class="row">
+     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+       <h2 class="mt-3">User info</h2>
 <%= form_with model:@user, local:true do |f| %>
-  <label for="inputName">Name</label>
-  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"name"%>
-
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-  <label for="inputImage">ProfileImage</label>
-  <%= f.attachment_field :profile_image, placeholder: "profile_image" %>
-
-  <label for="inputIntroduction">Introduction</label>
-  <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"introduction"%>
-
-  <%= f.submit "Update User" %>
+  <div class="form-gtoup">
+    <label for="inputName">Name</label></br>
+    <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"name", class: "form-control"%></br>
+  </div>
+  <div class="form-gtoup">
+    <label for="inputImage">Image</label></br>
+    <%= f.attachment_field :profile_image, placeholder: "profile_image" %></br>
+  </div>
+  <div class="form-gtoup">
+    <label class="mt-3" for="inputIntroduction">Introduction</label></br>
+    <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder:"introduction", class: "form-control"%></br>
+  </div>
+  <%= f.submit "Update User", class: "btn btn-secondary" %>
 <% end %>
+     </div>
+  </div>
+</div>

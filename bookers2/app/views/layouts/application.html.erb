@@ -1,45 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-     <% if user_signed_in? %>
-      <li>
-        <%= link_to "Home", root_path %> <!--ここのHomeと下のHomeではurlが違う事に注意。こっちはユーザーの投稿詳細画面-->
-      </li>
-      <li>
-        <%= link_to "Users", new_book_path %>
-      </li>
-      <li>
-        <%= link_to "Books", root_path %>
-      </li>
-      <li>
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "Sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "login", new_user_session_path %>
-      </li>
-    <% end %>
+
+  <header class="shadow-sm bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="nav-link text-white" href="/"><h2>Bookers</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+        </button>
+         <div class="collapse navbar-collapse" id="navbarNavDropdown">
+           <ul class="navbar-nav ml-auto">
+             <% if user_signed_in? %>
+               <li>
+                 <%= link_to " Home", user_path(current_user), class: 'fas fa-home nav-link text-white' %> <!--ここのHomeと下のHomeではurlが違う事に注意。こっちはユーザーの投稿詳細画面-->
+               </li>
+               <li>
+                 <%= link_to " Users", users_path, class: 'fas fa-users nav-link text-white' %>
+               </li>
+               <li>
+                 <%= link_to " Books", books_path, class: 'fas fa-book-open nav-link text-white' %>
+               </li>
+               <li>
+                 <%= link_to " logout", destroy_user_session_path, method: :delete, class: 'fas fa-sign-out-alt nav-link text-white' %>
+               </li>
+             <% else %>
+               <li>
+                 <%= link_to " Home", root_path, class: 'fas fa-home nav-link text-white' %>
+               </li>
+               <li>
+                 <%= link_to " About", about_path, class: 'fas fa-link nav-link text-white' %>
+               </li>
+               <li>
+                 <%= link_to " Sign up", new_user_registration_path, class: 'fas fa-user-plus nav-link text-white' %>
+               </li>
+               <li>
+                 <%= link_to " login", new_user_session_path, class: 'fas fa-sign-in-alt nav-link text-white' %>
+               </li>
+            <% end %>
+          </div>
+        </div>
+     </nav>
+  </header>
 
     <%= yield %>
+
+  <footer>
+    <div class='container mt-5'>
+      <div class='row'>
+        <div class="col-12"><p class="text-center">CopyRight Infratop.inc</p></div>
+      </div>
+    </div>
+  </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </body>
 </html>
