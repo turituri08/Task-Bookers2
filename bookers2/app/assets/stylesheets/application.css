@@ -24,3 +24,7 @@
 .forn{
   width: 60%;
 }
+
+.error_messages_color{
+  color: red;
+}
