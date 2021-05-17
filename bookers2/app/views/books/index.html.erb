@@ -1,10 +1,3 @@
-<% if @book.errors.any? %>
-    <%= @book.errors.count %>件のエラーが発生しました
-      <% @book.errors.full_messages.each do |message| %>
-        <%= message %>
-    <% end %>
-  <% end %>
-
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -31,7 +24,6 @@
                 <td><%= book.body %></td>
               </tr>
             <% end %>
-            <%= paginate @books %>
           </tbody>
        </table>
      </div>
