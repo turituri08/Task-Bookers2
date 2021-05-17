@@ -18,7 +18,7 @@
           <tbody>
             <% @books.each do |book| %>
               <tr>
-                <td><%= attachment_image_tag book.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %></td><!--　attachment_image_tagの第一引数@userでもいけた。じゃあ問題はbooks controllの方だけ？　-->
+                <td><%= attachment_image_tag book.user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></td><!--　attachment_image_tagの第一引数@userでもいけた。じゃあ問題はbooks controllの方だけ？　-->
                 <td><%= link_to book_path(book.id) do %>
                     <%= book.title %><% end %></td>
                 <td><%= book.body %></td>

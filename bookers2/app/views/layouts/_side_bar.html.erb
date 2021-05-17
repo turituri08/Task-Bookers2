@@ -9,7 +9,7 @@
 
 <div class="profile mt-3">
   <h2>User info</h2>
-  <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <%= attachment_image_tag user, :profile_image, :fill, 90, 90, format: 'jpeg', fallback: "no_image.jpg" %>
   <table class="table mt-3">
   <tr><th>name</th><th><%= user.name %></th></tr>
   <tr><th>introduction</th><th><%= user.introduction %></th></tr>
