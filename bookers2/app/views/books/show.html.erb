@@ -8,9 +8,10 @@
       <table class="table">
         <tr>
           <tbody>
-            <td><%= attachment_image_tag @user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></td>
-            <td><%= @user.name %></td> <!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
-            <td><%= @book.title %></td>
+            <td class="text-center"><%= link_to user_path(@user) do %>
+            <%= attachment_image_tag @user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></br>
+            <%= @user.name %></td><% end %> <!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
+            <td><%= link_to book_path(@book) do %><%= @book.title %><% end %></td>
             <td><%= @book.body %></td>
             <% if @user == current_user %>
               <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %></td>
