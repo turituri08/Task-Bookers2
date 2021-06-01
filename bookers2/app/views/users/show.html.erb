@@ -23,6 +23,7 @@
                 <td><%= link_to book_path(book.id) do %>
                     <%= book.title %><% end %></td>
                 <td><%= book.body %></td>
+                <td>コメント数：<%= book.book_comments.count %></td>
               </tr>
             <% end %>
             <%= paginate @books %>
