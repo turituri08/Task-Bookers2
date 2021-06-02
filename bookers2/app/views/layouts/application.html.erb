@@ -56,6 +56,22 @@
         </div>
      </nav>
   </header>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-7"></div>
+      <div class="col-md-5 mt-3 mb-4">
+       <% if user_signed_in? %>
+        <%= form_with url: search_path, method: :get, local: :true do |f| %>
+          <%= f.text_field :word %>
+          <%= f.select :range, options_for_select([["User"], ["Book"]]) %>
+          <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"],["前方一致","prefix_match"],["後方一致","Backward_match"]]) %>
+          <%= f.submit "検索" %>
+      　<% end %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+
     <div class="notice"><%= render "layouts/flash" %></div>
     <%= yield %>
 
