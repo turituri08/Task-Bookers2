@@ -21,6 +21,20 @@
                 <td><%= attachment_image_tag user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></td>
                 <td><%= user.name %></td>
                 <td><%= link_to "Show", user_path(user) %></td>
+                <td><% unless current_user == user %>
+                      <% if current_user.following?(user) %>
+                        <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
+                          <%= hidden_field_tag :follow_id, user.id %>
+                          <%= f.submit 'フォローを外す' %>
+                        <% end %>
+                      <% else %>
+                        <%= form_for(current_user.relationships.build) do |f| %>
+                          <%= hidden_field_tag :follow_id, user.id %>
+                          <%= f.submit 'フォローする' %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>

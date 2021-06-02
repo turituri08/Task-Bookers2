@@ -1,0 +1,26 @@
+ <div class="container">
+     <h2>Users</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th></th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= attachment_image_tag user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></td>
+              <td><%= user.name %></td>
+              <td>フォロー数：</td>
+              <th><%= user.followings.count %></th>
+              <td>フォロワー数：</td>
+              <th><%= user.followers.count %></th>
+              <td><%= link_to "Show", user_path(user) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+     </table>
+　</div>
