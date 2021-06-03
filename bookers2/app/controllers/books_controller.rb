@@ -17,7 +17,10 @@ class BooksController < ApplicationController
     @users = User.all
     @user = current_user
     @book = Book.new
-    @books = Book.page(params[:page]).reverse_order
+    @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+    #@books = Book.page(params[:page]).reverse_order
+    
+    #@exist = Discography.where(released_date: '2011-03-09').sum(:id)
   end
 
   def show

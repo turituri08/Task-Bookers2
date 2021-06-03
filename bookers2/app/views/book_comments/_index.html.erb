@@ -1,0 +1,12 @@
+<% book.book_comments.each do |book_comment| %>
+  <tr>
+    <td><%= attachment_image_tag book_comment.user, :profile_image, :fill, 90, 90, fallback: "no_image.jpg" %></br>
+    <%= book_comment.user.name %></td>
+    <td><%= book_comment.comment %></td>
+    <% if book_comment.user == current_user %>
+    <div class="comment-delete">
+      <td><%= link_to "Destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger" %></td>
+    </div>
+    <% end %>
+  </tr>
+<% end %>
