@@ -13,19 +13,19 @@
             <%= @user.name %></td><% end %> <!-- book変数のuser_idに関連付けられているuserモデルのnameカラムを表示します -->
             <td><%= link_to book_path(@book) do %><%= @book.title %><% end %></td>
             <td><%= @book.body %></td>
-            <td><%= render"favorites/favorite", book: @book %></td>
+            <td id="favorite-button_<%= @book.id %>">
+              <%= render"favorites/favorite", book: @book %>
+            </td>
             <% if @user == current_user %>
               <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %></td>
               <td><%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-danger" %></td>
             <% end %>
           </tbody>
         </tr>
-        <tbody>
-         <div id="comments_area">
-          <%= render "book_comments/index", book: @book, user: @user %>
-         </div>
-        </tbody>
       </table>
+         <table id="comments_area">
+          <%= render "book_comments/index", book: @book, user: @user %>
+         </table>
           <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
       </div>
     </div>
