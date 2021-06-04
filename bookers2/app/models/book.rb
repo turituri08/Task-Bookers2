@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+  is_impressionable counter_cache: true
 
   belongs_to :user
   has_many :book_comments, dependent: :destroy

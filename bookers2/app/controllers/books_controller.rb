@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  impressionist :actions=> [:show]
 
   def create
     @book = Book.new(book_params)
@@ -17,8 +18,6 @@ class BooksController < ApplicationController
     @users = User.all
     @user = current_user
     @book = Book.new
-    #@books = Book.joins(:favorites).where(favorites: { created_at: 0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:id).order("count(*) desc")
-    #@books = Book.joins(:favorites).where(favorites: { created_at: 0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:id).order("count(*) desc")
     books_all = Book.all.where(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
     @books = books_all.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
   end
@@ -28,6 +27,23 @@ class BooksController < ApplicationController
     @user = @book.user
     @booknew = Book.new
     @book_comment = BookComment.new
+    impressionist(@book, nil, unique: [:impressionable_id, :ip_address])
+    @currentUserEntry=Entry.where(user_id: current_user.id)
+    @userEntry=Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      unless @isRoom
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def edit

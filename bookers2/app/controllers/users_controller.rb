@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    impressionist(@user, nil, unique: [:impressionable_id, :ip_address])
     @book = Book.new
     @books = @user.books.page(params[:page]).reverse_order
     @currentUserEntry=Entry.where(user_id: current_user.id)

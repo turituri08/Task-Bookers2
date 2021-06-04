@@ -24,6 +24,7 @@
                     <%= book.title %><% end %></td>
                 <td><%= book.body %></td>
                 <td>コメント数：<%= book.book_comments.count %></td>
+                <td>閲覧数:<%= @user.impressions_count %></td>
               </tr>
             <% end %>
             <%= paginate @books %>
