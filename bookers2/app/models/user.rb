@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
 
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+
    validates :name, uniqueness: true, on: :create
    validates :name, length: { in: 2..20 }
    validates :introduction, length: { maximum: 50 }
